@@ -17,11 +17,12 @@
       <div class="form-group">
         <label>From:</label>
         <input
-        [(ngModel)]="flight.from"
-        name="from"
-        class="form-control"
-        required
-        minlength="3"
+          [(ngModel)]="flight.from"
+          name="from"
+          class="form-control"
+          required
+          minlength="3"
+          city
         >
       </div>
       @if (editForm?.controls?.['from']?.invalid) {
@@ -39,6 +40,12 @@
           Please enter at least {{
             editForm?.controls?.['from']?.errors?.['minlength']?.['requiredLength']
           }} chars so that the from control becomes valid.
+        </div>
+      }
+      @if (editForm?.controls?.['from']?.hasError('city')) {
+        <div class="alert alert-danger">
+          The entered city is not allowed. Please enter one of the following cities:<br>
+          {{ editForm?.controls?.['from']?.errors?.['city']?.['validCities'].join(', ') }}
         </div>
       }
       @if (editForm?.controls?.['from']?.errors) {
