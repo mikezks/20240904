@@ -1,15 +1,13 @@
 import { Component, OnDestroy, OnInit, effect, inject, input, model } from '@angular/core';
 import { NgClass } from '@angular/common';
-import { Flight } from '../model/flight';
+import { Flight } from '../../../model/flight';
 import { MatDialog } from '@angular/material/dialog';
-import { FlightEditComponent } from '../flight-edit/flight-edit.component';
+import { FlightEditReactiveComponent } from '../../features/flight-edit-reactive/flight-edit-reactive.component';
 
 @Component({
   selector: 'app-flight-card',
   standalone: true,
-  imports: [
-    NgClass
-  ],
+  imports: [NgClass],
   template: `
     <!-- View of Flight Card -->
     <div
@@ -32,7 +30,6 @@ import { FlightEditComponent } from '../flight-edit/flight-edit.component';
           <button (click)="toggleSelection()" class="btn btn-default">
             {{ selected() ? 'Remove' : 'Select' }}
           </button>
-
           <button (click)="edit()" class="btn btn-default">
             Edit
           </button>
@@ -57,9 +54,9 @@ export class FlightCardComponent {
     this.selected.update(selected => !selected);
   }
 
-  edit() {
-    this.dialog.open(FlightEditComponent, {
-      data: { flight: { ...this.item() } },
+  edit(): void {
+    this.dialog.open(FlightEditReactiveComponent, {
+      data: { flight: { ...this.item() }},
       minWidth: '70%',
       panelClass: 'form-dialog'
     });
