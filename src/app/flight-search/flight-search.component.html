@@ -33,7 +33,10 @@
         [item]="flight"
         [selected]="basket[flight.id]"
         (selectedChange)="basket[flight.id] = $event"
-      />
+      >
+        <p>Details: My useful information for this flight.</p>
+        <h4 class="subtitle">Subtitle for flights!</h4>
+      </app-flight-card>
 
     </div>
   }
