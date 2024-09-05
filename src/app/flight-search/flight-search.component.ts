@@ -1,25 +1,21 @@
 import { DatePipe } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { catchError, of } from 'rxjs';
 import { Flight } from '../model/flight';
 import { FlightService } from './flight.service';
-import { DummyFlightService } from './dummy-flight.service';
-import { catchError, of } from 'rxjs';
+import { FlightCardComponent } from '../flight-card/flight-card.component';
 
 @Component({
   selector: 'app-flight-search',
   standalone: true,
   imports: [
     FormsModule,
-    DatePipe
+    DatePipe,
+    FlightCardComponent
   ],
   templateUrl: './flight-search.component.html',
-  styleUrl: './flight-search.component.scss',
-  /* providers: [{
-    provide: FlightService,
-    useClass: DummyFlightService
-  }] */
+  styleUrl: './flight-search.component.scss'
 })
 export class FlightSearchComponent {
   private flightService = inject(FlightService);
@@ -27,7 +23,10 @@ export class FlightSearchComponent {
   from = 'Hamburg';
   to = 'Graz';
   flights: Flight[] = [];
-  selectedFlight: Flight | undefined;
+  basket: Record<number, boolean> = {
+    3: true,
+    5: true
+  };
 
   search(): void {
     this.flightService
@@ -38,11 +37,5 @@ export class FlightSearchComponent {
         next: flights => this.flights = flights,
         error: err => console.error(err)
       });
-  }
-
-  select(flight: Flight): void {
-    this.selectedFlight = flight === this.selectedFlight
-      ? undefined
-      : flight;
   }
 }
