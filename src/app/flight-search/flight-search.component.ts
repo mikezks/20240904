@@ -1,4 +1,4 @@
-import { DatePipe } from '@angular/common';
+import { DatePipe, JsonPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { catchError, of } from 'rxjs';
@@ -11,7 +11,7 @@ import { FlightCardComponent } from '../flight-card/flight-card.component';
   standalone: true,
   imports: [
     FormsModule,
-    DatePipe,
+    DatePipe, JsonPipe,
     FlightCardComponent
   ],
   templateUrl: './flight-search.component.html',
