@@ -4,10 +4,17 @@ import { Flight } from '../model/flight';
 import { DefaultFlightService } from './default-flight.service';
 import { DummyFlightService } from './dummy-flight.service';
 
+const useDummy = false;
 
 @Injectable({
   providedIn: 'root',
-  useClass: DefaultFlightService
+  useFactory: () => {
+    if (useDummy) {
+      return new DummyFlightService();
+    } else {
+      return new DefaultFlightService();
+    }
+  }
 })
 export abstract class FlightService {
 
