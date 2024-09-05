@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { Flight } from '../model/flight';
 import { FlightService } from './flight.service';
 import { DummyFlightService } from './dummy-flight.service';
+import { catchError, of } from 'rxjs';
 
 @Component({
   selector: 'app-flight-search',
@@ -30,10 +31,13 @@ export class FlightSearchComponent {
 
   search(): void {
     this.flightService
-      .find(this.from, this.to)
-      .subscribe(
-        flights => this.flights = flights
-      );
+      .find(this.from, this.to).pipe(
+        catchError(() => of([]))
+      )
+      .subscribe({
+        next: flights => this.flights = flights,
+        error: err => console.error(err)
+      });
   }
 
   select(flight: Flight): void {
