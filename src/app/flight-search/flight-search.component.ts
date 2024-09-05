@@ -4,6 +4,7 @@ import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Flight } from '../model/flight';
 import { FlightService } from './flight.service';
+import { DummyFlightService } from './dummy-flight.service';
 
 @Component({
   selector: 'app-flight-search',
@@ -13,7 +14,11 @@ import { FlightService } from './flight.service';
     DatePipe
   ],
   templateUrl: './flight-search.component.html',
-  styleUrl: './flight-search.component.scss'
+  styleUrl: './flight-search.component.scss',
+  /* providers: [{
+    provide: FlightService,
+    useClass: DummyFlightService
+  }] */
 })
 export class FlightSearchComponent {
   private flightService = inject(FlightService);
