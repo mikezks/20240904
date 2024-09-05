@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Flight } from '../model/flight';
+import { FlightService } from './flight.service';
 
 @Component({
   selector: 'app-flight-search',
@@ -15,7 +16,7 @@ import { Flight } from '../model/flight';
   styleUrl: './flight-search.component.scss'
 })
 export class FlightSearchComponent {
-  private http = inject(HttpClient);
+  private flightService = inject(FlightService);
 
   from = 'Hamburg';
   to = 'Graz';
@@ -23,11 +24,8 @@ export class FlightSearchComponent {
   selectedFlight: Flight | undefined;
 
   search(): void {
-    const url = 'https://demo.angulararchitects.io/api/flight';
-    const params = { from: this.from, to: this.to };
-    const headers = { 'Accept': 'application/json' };
-
-    this.http.get<Flight[]>(url, { params, headers })
+    this.flightService
+      .find(this.from, this.to)
       .subscribe(
         flights => this.flights = flights
       );
