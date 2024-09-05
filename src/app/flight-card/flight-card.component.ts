@@ -1,13 +1,15 @@
 import { Component, computed, effect, input, model, OnDestroy, OnInit, signal } from '@angular/core';
 import { Flight } from '../model/flight';
 import { DatePipe, NgClass } from '@angular/common';
+import { CityPipe } from '../shared/pipes/city.pipe';
 
 @Component({
   selector: 'app-flight-card',
   standalone: true,
   imports: [
     DatePipe,
-    NgClass
+    NgClass,
+    CityPipe
   ],
   templateUrl: './flight-card.component.html',
   styleUrl: './flight-card.component.scss'
