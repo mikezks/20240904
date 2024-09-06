@@ -15,7 +15,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 export class FlightEditReactiveComponent {
   private fb = inject(FormBuilder);
 
-  editForm = this.fb.group({
+  editForm = this.fb.nonNullable.group({
     id: [0],
     from: ['',
       [
@@ -27,5 +27,23 @@ export class FlightEditReactiveComponent {
     date: [new Date().toISOString()],
   });
 
-  save(): void {}
+  constructor() {
+    this.editForm.valueChanges.subscribe(console.log);
+    this.editForm.controls.from.valueChanges.subscribe(console.log);
+  }
+
+  save(): void {
+    /* this.editForm.patchValue({
+      from: ''
+    });
+    this.editForm.reset();
+    this.editForm.getRawValue(); */
+
+    console.log({
+      value: this.editForm.value,
+      valid: this.editForm.valid,
+      dirty: this.editForm.dirty,
+      touched: this.editForm.touched
+    });
+  }
 }
