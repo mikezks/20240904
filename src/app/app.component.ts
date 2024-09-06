@@ -5,6 +5,7 @@ import { FlightSearchComponent } from './flight-search/flight-search.component';
 import { FlightService } from './flight-search/flight.service';
 import { DefaultFlightService } from './flight-search/default-flight.service';
 import { NextFlightsModule } from './next-flights/next-flights.module';
+import { FlightEditComponent } from './flight-edit/flight-edit.component';
 
 @Component({
   standalone: true,
@@ -12,6 +13,7 @@ import { NextFlightsModule } from './next-flights/next-flights.module';
     SidebarComponent,
     NavbarComponent,
     FlightSearchComponent,
+    FlightEditComponent,
     NextFlightsModule
   ],
   selector: 'app-root',
