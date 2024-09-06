@@ -1,8 +1,7 @@
-import { Component, inject } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-import { Flight } from '../../../model/flight';
 import { JsonPipe } from '@angular/common';
+import { booleanAttribute, Component, inject, input, numberAttribute } from '@angular/core';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { initFlight } from '../../../model/flight';
 import { validateCity, validateCityWithParams } from '../../../shared/validation/city-validator';
 
 @Component({
@@ -10,18 +9,22 @@ import { validateCity, validateCityWithParams } from '../../../shared/validation
   standalone: true,
   imports: [
     JsonPipe,
-    ReactiveFormsModule,
-    MatDialogModule
+    ReactiveFormsModule
   ],
   templateUrl: './flight-edit-reactive.component.html',
   styleUrl: './flight-edit-reactive.component.scss'
 })
 export class FlightEditReactiveComponent {
-  dialogRef = inject(MatDialogRef);
-  data = inject<{ flight: Flight }>(MAT_DIALOG_DATA);
   private fb = inject(FormBuilder);
 
-  flight = this.data.flight;
+  id = input.required<number, string>({
+    transform: numberAttribute
+  });
+  showDetails = input<boolean, string>(false, {
+    transform: booleanAttribute
+  });
+
+  flight = initFlight;
 
   editForm = this.fb.nonNullable.group({
     id: [0],
@@ -54,9 +57,5 @@ export class FlightEditReactiveComponent {
       dirty: this.editForm.dirty,
       touched: this.editForm.touched,
     });
-  }
-
-  close(): void {
-    this.dialogRef.close();
   }
 }

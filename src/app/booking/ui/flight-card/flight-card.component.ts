@@ -3,11 +3,15 @@ import { NgClass } from '@angular/common';
 import { Flight } from '../../../model/flight';
 import { MatDialog } from '@angular/material/dialog';
 import { FlightEditReactiveComponent } from '../../features/flight-edit-reactive/flight-edit-reactive.component';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-flight-card',
   standalone: true,
-  imports: [NgClass],
+  imports: [
+    NgClass,
+    RouterLink
+  ],
   template: `
     <!-- View of Flight Card -->
     <div
@@ -30,9 +34,12 @@ import { FlightEditReactiveComponent } from '../../features/flight-edit-reactive
           <button (click)="toggleSelection()" class="btn btn-default">
             {{ selected() ? 'Remove' : 'Select' }}
           </button>
-          <button (click)="edit()" class="btn btn-default">
+          <a
+            [routerLink]="['../edit', item().id, { showDetails: true }]"
+            class="btn btn-default"
+          >
             Edit
-          </button>
+          </a>
         </p>
       </div>
     </div>
