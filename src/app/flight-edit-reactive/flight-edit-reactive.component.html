@@ -1,0 +1,70 @@
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Flight Edit Reactive</h2>
+  </div>
+
+  <div class="card-body">
+    <form [formGroup]="editForm">
+      <div class="form-group">
+        <label>ID:</label>
+        <input
+          formControlName="id"
+          class="form-control"
+        >
+      </div>
+
+      <div class="form-group">
+        <label>From:</label>
+        <input
+          formControlName="from"
+          class="form-control"
+        >
+      </div>
+      @if (editForm.controls.from.invalid) {
+        <div class="alert alert-danger">
+          From control is currently invalid.
+        </div>
+      }
+      @if (editForm.controls.from.hasError('required')) {
+        <div class="alert alert-danger">
+          From control is mandatory - please enter a value.
+        </div>
+      }
+      @if (editForm.controls.from.hasError('minlength')) {
+        <div class="alert alert-danger">
+          Please enter at least {{
+            editForm.controls.from.errors?.['minlength']?.['requiredLength']
+          }} chars so that the from control becomes valid.
+        </div>
+      }
+      @if (editForm.controls.from.hasError('city')) {
+        <div class="alert alert-danger">
+          The entered city is not allowed. Please enter one of the following cities:<br>
+          {{ editForm.controls.from.errors?.['city']?.['validCities'].join(', ') }}
+        </div>
+      }
+      @if (editForm.controls.from.errors) {
+        <div>
+          <pre>{{ editForm.controls.from.errors | json }}</pre>
+        </div>
+      }
+
+      <div class="form-group">
+        <label>To:</label>
+        <input formControlName="to" class="form-control">
+      </div>
+      <div class="form-group">
+        <label>Date:</label>
+        <input formControlName="date" class="form-control">
+      </div>
+      <div class="form-group">
+        <button
+          (click)="save()"
+          class="btn btn-default"
+        >
+          Save
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
