@@ -3,6 +3,7 @@ import { HomeComponent } from './core/features/home/home.component';
 import { FlightSearchComponent } from './booking/features/flight-search/flight-search.component';
 import { PassengerSearchComponent } from './booking/features/passenger-search/passenger-search.component';
 import { AboutComponent } from './core/features/about/about.component';
+import { BOOKING_ROUTES } from './booking/booking.routes';
 
 
 export const APP_ROUTES: Routes = [
@@ -15,14 +16,7 @@ export const APP_ROUTES: Routes = [
     path: 'home',
     component: HomeComponent
   },
-  {
-    path: 'flight-search',
-    component: FlightSearchComponent
-  },
-  {
-    path: 'passenger-search',
-    component: PassengerSearchComponent
-  },
+  ...BOOKING_ROUTES,
   {
     path: 'about',
     component: AboutComponent
