@@ -2,13 +2,15 @@ import { JsonPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { validateCity, validateCityWithParams } from '../shared/validation/validate-city';
+import { ValidationErrorsComponent } from '../shared/validation/validation-errors/validation-error.component';
 
 @Component({
   selector: 'app-flight-edit-reactive',
   standalone: true,
   imports: [
     ReactiveFormsModule,
-    JsonPipe
+    JsonPipe,
+    ValidationErrorsComponent
   ],
   templateUrl: './flight-edit-reactive.component.html',
   styleUrl: './flight-edit-reactive.component.scss'
