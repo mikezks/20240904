@@ -4,12 +4,14 @@ import { SidebarComponent } from './core/ui/sidebar/sidebar.component';
 import { FlightSearchComponent } from './booking/features/flight-search/flight-search.component';
 import { NextFlightsModule } from './next-flights/next-flights.module';
 import { ConfigService } from './shared/config/config.service';
+import { RouterOutlet } from '@angular/router';
 
 
 @Component({
   standalone: true,
   selector: 'app-root',
   imports: [
+    RouterOutlet,
     SidebarComponent,
     NavbarComponent,
     FlightSearchComponent,
@@ -26,9 +28,7 @@ import { ConfigService } from './shared/config/config.service';
 
         <div class="content">
 
-          <app-flight-search />
-
-          <app-next-flights />
+          <router-outlet />
 
         </div>
 
