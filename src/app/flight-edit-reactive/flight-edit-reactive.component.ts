@@ -1,6 +1,7 @@
 import { JsonPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { validateCity, validateCityWithParams } from '../shared/validation/validate-city';
 
 @Component({
   selector: 'app-flight-edit-reactive',
@@ -21,9 +22,16 @@ export class FlightEditReactiveComponent {
       [
         Validators.required,
         Validators.minLength(3),
+        validateCity
       ]
     ],
-    to: [''],
+    to: ['',
+      [
+        validateCityWithParams([
+          'London', 'Paris', 'New York'
+        ])
+      ]
+    ],
     date: [new Date().toISOString()],
   });
 
