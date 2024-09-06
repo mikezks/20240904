@@ -51,6 +51,10 @@ export class FlightSearchComponent {
   }
 
   search(): void {
+    if (!this.from() || !this.to()) {
+      return;
+    }
+
     // Reset properties
     this.message = '';
     this.selectedFlight = undefined;
